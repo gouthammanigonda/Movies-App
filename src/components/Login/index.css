@@ -1,0 +1,85 @@
+.login-main-container {
+  background-image: url('https://res.cloudinary.com/gouthamchintu/image/upload/v1656954875/Movies%20App/netfilx_1_qg8lem.jpg');
+  background-size: 1550px 750px;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding: 30px 120px;
+}
+
+.sub-container-login {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  align-self: center;
+  margin-top: 50px;
+}
+
+.login-form {
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 50px 70px;
+  width: 461px;
+  height: 436px;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+}
+
+.form-heading {
+  font-size: 32px;
+  color: white;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.login-label {
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.input {
+  background-color: #333333;
+  border: 0px;
+  height: 40px;
+  color: #e2e8f0;
+  line-height: 24px;
+  font-weight: 400;
+  padding: 0px 15px;
+  outline: none;
+}
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.login-button {
+  padding: 9px 0px;
+  background-color: #e50914;
+  color: white;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  border: 0px;
+}
+
+.error-msg {
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media all and (max-width: 500px) {
+  .login-main-container {
+    background-size: cover;
+  }
+}
