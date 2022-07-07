@@ -1,0 +1,45 @@
+.footer-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px;
+}
+.footer-icons-container {
+  margin-bottom: 10px;
+  display: flex;
+
+  height: 30px;
+}
+.footer-icon {
+  color: lightblue;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+.footer-para {
+  color: lightblue;
+  font-weight: 500;
+  margin-top: 0px;
+}
+
+.a {
+  cursor: pointer;
+}
+
+.ho1:hover .a {
+  color: green;
+  font-size: 20px;
+}
+.ho2:hover .b {
+  color: green;
+  font-size: 20px;
+}
+.ho3:hover .c {
+  color: green;
+  font-size: 20px;
+}
+.ho4:hover .d {
+  color: green;
+  font-size: 20px;
+}
