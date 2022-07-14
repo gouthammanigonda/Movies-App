@@ -12,34 +12,31 @@
   height: 30px;
 }
 .footer-icon {
-  color: lightblue;
+  color: white;
   margin-left: 10px;
   margin-right: 10px;
   transition: 0.5s;
+  cursor: pointer;
 }
 .footer-para {
-  color: lightblue;
+  color: white;
   font-weight: 500;
   margin-top: 0px;
 }
 
-.a {
-  cursor: pointer;
-}
-
 .ho1:hover .a {
-  color: green;
+  color: lightcoral;
   font-size: 20px;
 }
 .ho2:hover .b {
-  color: green;
+  color: lightskyblue;
   font-size: 20px;
 }
 .ho3:hover .c {
-  color: green;
+  color: lightgreen;
   font-size: 20px;
 }
 .ho4:hover .d {
-  color: green;
+  color: lightsalmon;
   font-size: 20px;
 }

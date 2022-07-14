@@ -1,0 +1,91 @@
+.main-container-home {
+  min-height: 100vh;
+  font-family: 'Roboto';
+  background-color: #0c0b10;
+}
+
+.poster-container {
+  padding: 20px 120px;
+}
+
+.poster-container {
+  height: 60%;
+
+  padding-top: 0px;
+}
+
+.poster-heading {
+  color: white;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.poster-para {
+  color: white;
+  font-size: 20px;
+  width: 50%;
+}
+
+.button-poster {
+  padding: 10px 30px;
+  color: black;
+  font-weight: 500;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.linear-gradient {
+  background-image: linear-gradient(
+    to top,
+    #0c0b10,
+    rgba(19, 19, 19, 0.8),
+    transparent
+  );
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.second-session-home {
+  padding: 20px 120px;
+}
+
+.each-ul-heading {
+  font-family: 'Roboto';
+  color: white;
+}
+
+.unordered-list {
+  padding-left: 0px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.list-item {
+  list-style: none;
+  cursor: pointer;
+}
+
+.each-img-home {
+  width: 200px;
+  height: 120px;
+  border-radius: 5px;
+  transition: 500ms;
+}
+
+.trending-container {
+  height: 250px;
+}
+
+.original-container {
+}
+
+.list-item:hover .each-img-home {
+  width: 210px;
+  height: 130px;
+}
