@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {HiOutlineSearch} from 'react-icons/hi'
+import {Link} from 'react-router-dom'
 
 import './index.css'
 
@@ -15,7 +16,10 @@ class Header extends Component {
               className="header-image"
             />
           </div>
-          <p className="header-links">Home</p>
+          <Link to="/">
+            <p className="header-links">Home</p>
+          </Link>
+
           <p className="header-links">Popular</p>
         </div>
         <div className="header-search-profile-container">

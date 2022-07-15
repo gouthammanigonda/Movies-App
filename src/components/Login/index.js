@@ -57,7 +57,6 @@ class Login extends Component {
     if (token !== undefined) {
       return <Redirect to="/" />
     }
-
     return (
       <div>
         <div className="login-main-container">

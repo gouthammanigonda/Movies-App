@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Slider from 'react-slick'
+import {Link} from 'react-router-dom'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -80,7 +81,7 @@ class Home extends Component {
 
   renderPosterViewHome = () => {
     const {randomItem} = this.state
-    const {backdropPath, id, overview, posterPath, title} = randomItem
+    const {overview, posterPath, title} = randomItem
 
     const style = {
       backgroundImage: `url(${posterPath})`,
@@ -141,9 +142,11 @@ class Home extends Component {
         {item.map(each => {
           const {backdropPath, id, title} = each
           return (
-            <li className="list-item" key={id}>
-              <img src={backdropPath} alt={title} className="each-img-home" />
-            </li>
+            <Link to={`/movies/${id}`}>
+              <li className="list-item" key={id}>
+                <img src={backdropPath} alt={title} className="each-img-home" />
+              </li>
+            </Link>
           )
         })}
       </Slider>
