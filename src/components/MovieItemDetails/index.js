@@ -152,13 +152,17 @@ class MovieItemDetails extends Component {
             <div className="each-details">
               <h1 className="highlighter">Genres</h1>
               {genre.map(each => (
-                <p className="each-detail-para">{each.name}</p>
+                <p key={each.id} className="each-detail-para">
+                  {each.name}
+                </p>
               ))}
             </div>
             <div className="each-details">
               <h1 className="highlighter">Audio Available</h1>
               {language.map(each => (
-                <p className="each-detail-para">{each.englishName}</p>
+                <p key={each.id} className="each-detail-para">
+                  {each.englishName}
+                </p>
               ))}
             </div>
             <div className="each-details">
