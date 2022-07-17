@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import {HiOutlineSearch} from 'react-icons/hi'
 import {Link} from 'react-router-dom'
 
@@ -9,44 +10,20 @@ class Header extends Component {
     searchIp: '',
   }
 
-  renderInputContent = () => {
-    const onChangeInput = event => {
-      this.setState({
-        searchIp: event.target.value,
-      })
-    }
-    const {triggerSearchBtn} = this.props
-    const onClickSearchBtn = event => {
-      event.preventDefault()
-      const {searchIp} = this.state
-      triggerSearchBtn(searchIp)
-    }
-    const {searchIp} = this.state
+  onChangeInput = event => {
+    this.setState({
+      searchIp: event.target.value,
+    })
+  }
 
-    return (
-      <Link to="/search">
-        <div className="search-input-header">
-          <input
-            type="search"
-            value={searchIp}
-            className="header-search-input"
-            onChange={onChangeInput}
-          />
-          <button
-            type="button"
-            onClick={onClickSearchBtn}
-            className="search-button"
-          >
-            <HiOutlineSearch className="header-search-icon" />
-          </button>
-        </div>
-      </Link>
-    )
+  onClickSearchBtn = () => {
+    const {searchIp} = this.state
+    const {triggerSearchBtn} = this.props
+    triggerSearchBtn(searchIp)
   }
 
   render() {
     const {searchIp} = this.state
-    console.log(searchIp)
     return (
       <div className="header-main-container">
         <div className="header-links-container">
@@ -65,7 +42,23 @@ class Header extends Component {
           </Link>
         </div>
         <div className="header-search-profile-container">
-          {this.renderInputContent()}
+          <Link to="/search">
+            <div className="search-input-header">
+              <input
+                type="search"
+                value={searchIp}
+                className="header-search-input"
+                onChange={this.onChangeInput}
+              />
+              <button
+                type="button"
+                onClick={this.onClickSearchBtn}
+                className="search-button"
+              >
+                <HiOutlineSearch className="header-search-icon" />
+              </button>
+            </div>
+          </Link>
           <div>
             <img
               src="https://res.cloudinary.com/gouthamchintu/image/upload/v1657160811/Movies%20App/Group_lonren.jpg"

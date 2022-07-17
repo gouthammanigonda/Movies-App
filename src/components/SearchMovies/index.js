@@ -7,8 +7,6 @@ import Footer from '../Footer'
 
 import './index.css'
 
-import('typeface-hk-grotesk')
-
 class SearchMovies extends Component {
   state = {
     searchList: [],
@@ -62,12 +60,10 @@ class SearchMovies extends Component {
 
   triggerSearchBtn = searchIp => {
     this.getSearchMovies(searchIp)
-    this.setState(
-      {
-        searchBtnClicked: true,
-      },
-      this.getSearchMovies,
-    )
+    this.setState({
+      searchBtnClicked: true,
+    })
+    console.log(searchIp, 'trigger')
   }
 
   showNoResultsFound = () => {
