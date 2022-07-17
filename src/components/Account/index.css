@@ -1,0 +1,106 @@
+.account-items {
+  padding: 20px 120px;
+  min-height: 65vh;
+  background-color: white;
+}
+
+.account-main-heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+}
+
+.hr-line {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+}
+
+.account-details {
+  display: flex;
+}
+
+.flex-info {
+  margin-right: 20px;
+}
+
+.flex-info-2 {
+}
+
+.password-flex {
+  display: flex;
+  align-items: center;
+}
+
+.margin-top {
+  margin-top: 0px;
+}
+
+.key {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  color: #94a3b8;
+}
+
+.value {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 31px;
+  color: #1e293b;
+}
+
+.plan-details {
+  display: flex;
+}
+
+.plan-flex {
+  display: flex;
+  align-items: center;
+}
+
+.border-box-para {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #1e293b;
+  border: 1px solid #1e293b;
+  padding: 5px 2px;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.login-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.logout-btn {
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  line-height: 24px;
+  background: #e50914;
+  border-radius: 4px;
+  padding: 8px 20px;
+  border: 0px;
+  width: 90px;
+  height: 40px;
+  transition: 500ms;
+  cursor: pointer;
+  outline: none;
+}
+
+.logout-btn:hover {
+  width: 95px;
+  height: 45px;
+  font-weight: 500;
+  font-size: 18px;
+}

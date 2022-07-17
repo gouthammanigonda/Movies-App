@@ -58,12 +58,14 @@ class SearchMovies extends Component {
     }
   }
 
-  triggerSearchBtn = searchIp => {
-    this.getSearchMovies(searchIp)
+  setButtonDisable = () => {
     this.setState({
       searchBtnClicked: true,
     })
-    console.log(searchIp, 'trigger')
+  }
+
+  triggerSearchBtn = searchIp => {
+    this.getSearchMovies(searchIp)
   }
 
   showNoResultsFound = () => {
@@ -115,9 +117,14 @@ class SearchMovies extends Component {
 
   renderSearchMoviesView = () => {
     const {searchBtnClicked} = this.state
+    console.log(searchBtnClicked, 'search component')
     return (
       <div className="main-container-pop-movies">
-        <Header triggerSearchBtn={this.triggerSearchBtn} />
+        <Header
+          triggerSearchBtn={this.triggerSearchBtn}
+          searchBtnClicked={searchBtnClicked}
+          setButtonDisable={this.setButtonDisable}
+        />
         <div className="search-items">
           {!searchBtnClicked ? '' : this.renderSearchItems()}
         </div>

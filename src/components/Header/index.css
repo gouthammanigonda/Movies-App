@@ -14,6 +14,19 @@
 .header-links {
   color: white;
   text-decoration: none;
+  width: 60px;
+  transition: all 500ms;
+  display: flex;
+  justify-content: center;
+}
+
+.link-text {
+  transition: 700ms;
+}
+
+.header-links:hover .link-text {
+  font-size: 15px;
+  border-bottom: 1px solid white;
 }
 
 .header-search-profile-container {
@@ -58,7 +71,7 @@
 }
 
 .search-input-header:hover .search-button {
-  background-color: #131313;
+  background-color: #383838;
 }
 
 .header-search-icon {

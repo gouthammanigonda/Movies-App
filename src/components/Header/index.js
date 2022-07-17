@@ -16,14 +16,23 @@ class Header extends Component {
     })
   }
 
+  onClickSearchContainer = () => {}
+
   onClickSearchBtn = () => {
     const {searchIp} = this.state
     const {triggerSearchBtn} = this.props
     triggerSearchBtn(searchIp)
   }
 
+  onClickInput = () => {
+    const {setButtonDisable} = this.props
+    setButtonDisable()
+  }
+
   render() {
     const {searchIp} = this.state
+    const {searchBtnClicked} = this.props
+    console.log(searchBtnClicked, 'feader component')
     return (
       <div className="header-main-container">
         <div className="header-links-container">
@@ -35,10 +44,10 @@ class Header extends Component {
             />
           </div>
           <Link to="/" className="header-links">
-            <p>Home</p>
+            <p className="link-text">Home</p>
           </Link>
           <Link to="/popular" className="header-links">
-            <p>Popular</p>
+            <p className="link-text">Popular</p>
           </Link>
         </div>
         <div className="header-search-profile-container">
@@ -49,22 +58,26 @@ class Header extends Component {
                 value={searchIp}
                 className="header-search-input"
                 onChange={this.onChangeInput}
+                onClick={this.onClickInput}
               />
               <button
                 type="button"
                 onClick={this.onClickSearchBtn}
                 className="search-button"
+                disabled={!searchBtnClicked}
               >
                 <HiOutlineSearch className="header-search-icon" />
               </button>
             </div>
           </Link>
           <div>
-            <img
-              src="https://res.cloudinary.com/gouthamchintu/image/upload/v1657160811/Movies%20App/Group_lonren.jpg"
-              alt="profile"
-              className="header-profile-image"
-            />
+            <Link to="/account">
+              <img
+                src="https://res.cloudinary.com/gouthamchintu/image/upload/v1657160811/Movies%20App/Group_lonren.jpg"
+                alt="profile"
+                className="header-profile-image"
+              />
+            </Link>
           </div>
         </div>
       </div>

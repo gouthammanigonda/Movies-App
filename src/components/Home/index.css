@@ -10,6 +10,13 @@
   padding-top: 0px;
 }
 
+.loader-container-poster {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .poster-heading {
   color: white;
   font-size: 50px;
@@ -90,4 +97,38 @@
 .list-item:hover .each-img-home {
   width: 215px;
   height: 125px;
+}
+
+.loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.warning-content {
+  text-align: center;
+}
+
+.warning-icon {
+  color: #d81f26;
+  font-size: 25px;
+}
+
+.warning-msg {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+
+  color: #ffffff;
+}
+
+.try-again {
+  border: 0px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  padding: 4px 16px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
 }

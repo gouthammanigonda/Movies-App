@@ -2,14 +2,23 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Slider from 'react-slick'
 import {Link} from 'react-router-dom'
+import {AiOutlineWarning} from 'react-icons/ai'
 
 import Header from '../Header'
 import Footer from '../Footer'
+import Loader from '../Loader'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import './index.css'
+
+const apiConstant = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
 
 class Home extends Component {
   state = {
@@ -17,6 +26,7 @@ class Home extends Component {
     topRatedList: [],
     originalList: [],
     randomItem: [],
+    apiStatus: apiConstant.initial,
   }
 
   componentDidMount() {
@@ -26,6 +36,7 @@ class Home extends Component {
   }
 
   getTrendingNowMovies = async () => {
+    this.setState({apiStatus: apiConstant.inProgress})
     const token = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/movies-app/trending-movies'
     const options = {
@@ -50,6 +61,11 @@ class Home extends Component {
       this.setState({
         trendingList: updatedList,
         randomItem,
+        apiStatus: apiConstant.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiConstant.failure,
       })
     }
   }
@@ -107,8 +123,24 @@ class Home extends Component {
     }
   }
 
+  renderPosterInfo = (title, overview) => (
+    <div>
+      <h1 className="poster-heading">{title}</h1>
+      <p className="poster-para">{overview}</p>
+      <button className="button-poster" type="button">
+        Play
+      </button>
+    </div>
+  )
+
+  renderLoaderPoster = () => (
+    <div className="loader-container-poster">
+      <Loader />
+    </div>
+  )
+
   renderPosterViewHome = () => {
-    const {randomItem} = this.state
+    const {randomItem, apiStatus} = this.state
     const {overview, posterPath, title} = randomItem
 
     const style = {
@@ -123,11 +155,18 @@ class Home extends Component {
         <Header />
         <div className="linear-gradient">
           <div className="poster-container">
-            <h1 className="poster-heading">{title}</h1>
-            <p className="poster-para">{overview}</p>
-            <button className="button-poster" type="button">
-              Play
-            </button>
+            {(() => {
+              switch (apiStatus) {
+                case apiConstant.failure:
+                  return this.renderFailureViewTrending()
+                case apiConstant.success:
+                  return this.renderPosterInfo(title, overview)
+                case apiConstant.inProgress:
+                  return this.renderLoaderPoster()
+                default:
+                  return null
+              }
+            })()}
           </div>
         </div>
       </div>
@@ -181,21 +220,126 @@ class Home extends Component {
     )
   }
 
+  renderLoaderView = () => (
+    <div className="loader">
+      <Loader />
+    </div>
+  )
+
+  onClickTryAgainTopRated = () => {
+    this.getTopRatedMovies()
+  }
+
+  renderFailureViewTopRated = () => (
+    <div className="loader">
+      <div className="warning-content">
+        <AiOutlineWarning className="warning-icon" />
+        <p className="warning-msg">Something went wrong. Please try again</p>
+        <button
+          type="button"
+          className="try-again"
+          onClick={this.onClickTryAgainTopRated}
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  )
+
+  onClickTryAgainTrending = () => {
+    this.getTrendingNowMovies()
+  }
+
+  renderFailureViewTrending = () => (
+    <div className="loader">
+      <div className="warning-content">
+        <AiOutlineWarning className="warning-icon" />
+        <p className="warning-msg">Something went wrong. Please try again</p>
+        <button
+          type="button"
+          className="try-again"
+          onClick={this.onClickTryAgainTrending}
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  )
+
+  onClickTryAgainOriginal = () => {
+    this.getOriginals()
+  }
+
+  renderFailureViewOriginal = () => (
+    <div className="loader">
+      <div className="warning-content">
+        <AiOutlineWarning className="warning-icon" />
+        <p className="warning-msg">Something went wrong. Please try again</p>
+        <button
+          type="button"
+          className="try-again"
+          onClick={this.onClickTryAgainOriginal}
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  )
+
   renderSecondSection = () => {
-    const {trendingList, originalList, topRatedList} = this.state
+    const {trendingList, originalList, topRatedList, apiStatus} = this.state
     return (
       <div className="second-session-home">
         <div className="trending-container">
           <h1 className="each-ul-heading">Trending Now</h1>
-          <ul className="unordered-list">{this.slickSlider(trendingList)}</ul>
+          <ul className="unordered-list">
+            {(() => {
+              switch (apiStatus) {
+                case apiConstant.failure:
+                  return this.renderFailureViewTrending()
+                case apiConstant.inProgress:
+                  return this.renderLoaderView()
+                case apiConstant.success:
+                  return this.slickSlider(trendingList)
+                default:
+                  return null
+              }
+            })()}
+          </ul>
         </div>
         <div className="trending-container">
           <h1 className="each-ul-heading">Top Rated</h1>
-          <ul className="unordered-list">{this.slickSlider(topRatedList)}</ul>
+          <ul className="unordered-list">
+            {(() => {
+              switch (apiStatus) {
+                case apiConstant.failure:
+                  return this.renderFailureViewTopRated()
+                case apiConstant.inProgress:
+                  return this.renderLoaderView()
+                case apiConstant.success:
+                  return this.slickSlider(topRatedList)
+                default:
+                  return null
+              }
+            })()}
+          </ul>
         </div>
         <div className="original-container">
           <h1 className="each-ul-heading">Originals</h1>
-          <ul className="unordered-list">{this.slickSlider(originalList)}</ul>
+          <ul className="unordered-list">
+            {(() => {
+              switch (apiStatus) {
+                case apiConstant.failure:
+                  return this.renderFailureViewOriginal()
+                case apiConstant.inProgress:
+                  return this.renderLoaderView()
+                case apiConstant.success:
+                  return this.slickSlider(originalList)
+                default:
+                  return null
+              }
+            })()}
+          </ul>
         </div>
       </div>
     )
