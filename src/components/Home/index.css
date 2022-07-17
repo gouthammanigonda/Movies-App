@@ -1,6 +1,6 @@
 .main-container-home {
   min-height: 100vh;
-  font-family: 'Roboto';
+
   background-color: #0c0b10;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .each-ul-heading {
-  font-family: 'Roboto';
+  font-family: 'HK-Grotesk';
   color: white;
 }
 
