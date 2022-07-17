@@ -14,6 +14,7 @@ import './index.css'
 class Home extends Component {
   state = {
     trendingList: [],
+    topRatedList: [],
     originalList: [],
     randomItem: [],
   }
@@ -21,6 +22,7 @@ class Home extends Component {
   componentDidMount() {
     this.getTrendingNowMovies()
     this.getOriginals()
+    this.getTopRatedMovies()
   }
 
   getTrendingNowMovies = async () => {
@@ -48,6 +50,32 @@ class Home extends Component {
       this.setState({
         trendingList: updatedList,
         randomItem,
+      })
+    }
+  }
+
+  getTopRatedMovies = async () => {
+    const token = Cookies.get('jwt_token')
+    const url = 'https://apis.ccbp.in/movies-app/top-rated-movies'
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    const response = await fetch(url, options)
+
+    if (response.ok) {
+      const data = await response.json()
+      const updatedData = data.results.map(each => ({
+        backdropPath: each.backdrop_path,
+        id: each.id,
+        overview: each.overview,
+        posterPath: each.poster_path,
+        title: each.title,
+      }))
+      this.setState({
+        topRatedList: updatedData,
       })
     }
   }
@@ -89,7 +117,7 @@ class Home extends Component {
       backgroundSize: '100% 100%',
       height: '80vh',
     }
-    console.log(randomItem.title)
+
     return (
       <div style={style} className="home-poster">
         <Header />
@@ -154,12 +182,16 @@ class Home extends Component {
   }
 
   renderSecondSection = () => {
-    const {trendingList, originalList} = this.state
+    const {trendingList, originalList, topRatedList} = this.state
     return (
       <div className="second-session-home">
         <div className="trending-container">
           <h1 className="each-ul-heading">Trending Now</h1>
           <ul className="unordered-list">{this.slickSlider(trendingList)}</ul>
+        </div>
+        <div className="trending-container">
+          <h1 className="each-ul-heading">Top Rated</h1>
+          <ul className="unordered-list">{this.slickSlider(topRatedList)}</ul>
         </div>
         <div className="original-container">
           <h1 className="each-ul-heading">Originals</h1>
@@ -172,7 +204,6 @@ class Home extends Component {
   render() {
     const {trendingList, originalList} = this.state
 
-    console.log(trendingList, 'home trending', originalList, 'home original')
     return (
       <div className="main-container-home">
         {this.renderPosterViewHome()}
