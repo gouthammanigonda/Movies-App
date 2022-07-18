@@ -58,11 +58,10 @@ class Home extends Component {
         posterPath: each.poster_path,
         title: each.title,
       }))
-      const len = updatedList.length
-      const randomItem = updatedList[Math.floor(Math.random() * len)]
+
       this.setState({
         trendingList: updatedList,
-        randomItem,
+
         apiStatusTrending: apiConstant.success,
       })
     } else {
@@ -129,10 +128,12 @@ class Home extends Component {
         posterPath: each.poster_path,
         title: each.title,
       }))
-
+      const len = updatedList.length
+      const randomItem = updatedList[Math.floor(Math.random() * len)]
       this.setState({
         originalList: updatedList,
         apiStatusOriginal: apiConstant.success,
+        randomItem,
       })
     } else {
       this.setState({

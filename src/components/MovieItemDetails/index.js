@@ -105,7 +105,11 @@ class MovieItemDetails extends Component {
       <Header />
       <div className="view-container">
         <div className="warning-content">
-          <AiOutlineWarning className="warning-icon each-icon" />
+          <img
+            src="https://res.cloudinary.com/gouthamchintu/image/upload/v1658134882/Movies%20App/alert-triangle_xmmy4u.png"
+            alt="failure view"
+            className="warning-icon each-icon"
+          />
           <p className="warning-msg each-para">
             Something went wrong. Please try again
           </p>
@@ -223,7 +227,7 @@ class MovieItemDetails extends Component {
                 <p className="each-detail-para">{voteCount}</p>
               </div>
               <div>
-                <h1 className="highlighter">Average Rating</h1>
+                <h1 className="highlighter">Rating Average</h1>
                 <p className="each-detail-para">{voteAverage}</p>
               </div>
             </div>

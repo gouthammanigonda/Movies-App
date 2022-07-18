@@ -34,12 +34,14 @@ class Header extends Component {
     return (
       <div className="header-main-container">
         <div className="header-links-container">
-          <div>
-            <img
-              src="https://res.cloudinary.com/gouthamchintu/image/upload/v1656954824/Movies%20App/Group_7399_icxhz5.png"
-              alt="website logo"
-              className="header-image"
-            />
+          <div className="logo-container">
+            <Link to="/">
+              <img
+                src="https://res.cloudinary.com/gouthamchintu/image/upload/v1656954824/Movies%20App/Group_7399_icxhz5.png"
+                alt="website logo"
+                className="header-image"
+              />
+            </Link>
           </div>
           <div className="links-container-main">
             <div className="links-sub-container">

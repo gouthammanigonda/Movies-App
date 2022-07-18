@@ -21,7 +21,7 @@ const Account = props => {
     <div className="main-container-pop-movies">
       <Header />
       <div className="account-items">
-        <h1 className="account-main-heading">Accounts</h1>
+        <h1 className="account-main-heading">Account</h1>
         <hr className="hr-line" />
         <div className="account-details">
           <div className="flex-info">
@@ -30,8 +30,10 @@ const Account = props => {
           <div className="flex-info-2">
             <p className="value">{username}@gmail.com</p>
             <div className="password-flex">
-              <p className="key margin-top">Password : </p>
-              <p className="value margin-top">{'*'.repeat(password.length)}</p>
+              <p className="key margin-top">Password</p>
+              <p className="value margin-top">
+                : {'*'.repeat(password.length)}
+              </p>
             </div>
           </div>
         </div>
