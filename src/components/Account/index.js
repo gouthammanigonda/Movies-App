@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-import {withRouter} from 'react-router-dom'
+import {withRouter, Redirect} from 'react-router-dom'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -16,6 +16,11 @@ const Account = props => {
 
   const username = Cookies.get('username')
   const password = Cookies.get('password')
+  if (username === undefined || password === undefined) {
+    Cookies.remove('jwt_token')
+    const {history} = props
+    history.replace('/login')
+  }
 
   return (
     <div className="main-container-pop-movies">
@@ -32,6 +37,7 @@ const Account = props => {
             <div className="password-flex">
               <p className="key margin-top">Password</p>
               <p className="value margin-top">
+                {' '}
                 : {'*'.repeat(password.length)}
               </p>
             </div>

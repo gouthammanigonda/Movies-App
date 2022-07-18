@@ -30,7 +30,7 @@ class Header extends Component {
   render() {
     const {searchIp} = this.state
     const {searchBtnClicked} = this.props
-    console.log(searchBtnClicked, 'feader component')
+    const containerStyle = searchIp !== '' ? 'search-container-border' : ''
     return (
       <div className="header-main-container">
         <div className="header-links-container">

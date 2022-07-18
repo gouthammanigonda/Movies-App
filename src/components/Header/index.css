@@ -76,7 +76,7 @@
 }
 
 .header-search-input {
-  border: none;
+  border: 0px;
   background: transparent;
   height: 25px;
   color: white;
@@ -85,6 +85,12 @@
   font-size: 14px;
   outline: none;
   padding: 0px 10px;
+}
+
+.header-search-input:focus {
+  border: 1px solid white;
+  height: 42px;
+  width: 209px;
 }
 
 .search-button {
