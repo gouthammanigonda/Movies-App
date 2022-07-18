@@ -11,22 +11,33 @@
   gap: 30px;
 }
 
+.links-container-main {
+  display: flex;
+  height: 70px;
+}
+
+.links-sub-container {
+  width: 100px;
+}
+
 .header-links {
   color: white;
   text-decoration: none;
-  width: 60px;
-  transition: all 500ms;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .link-text {
-  transition: 700ms;
+  line-height: 30px;
+  width: 60px;
+  font-size: 18px;
+  transition: all 500ms;
 }
 
-.header-links:hover .link-text {
-  font-size: 15px;
-  border-bottom: 1px solid white;
+.links-sub-container:hover .link-text {
+  border-bottom: 2px solid #e50914;
+  font-size: 20px;
+  font-weight: 500;
+  color: whitesmoke;
 }
 
 .header-search-profile-container {

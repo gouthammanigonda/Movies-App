@@ -41,12 +41,18 @@ class Header extends Component {
               className="header-image"
             />
           </div>
-          <Link to="/" className="header-links">
-            <p className="link-text">Home</p>
-          </Link>
-          <Link to="/popular" className="header-links">
-            <p className="link-text">Popular</p>
-          </Link>
+          <div className="links-container-main">
+            <div className="links-sub-container">
+              <Link to="/" className="header-links">
+                <p className="link-text">Home</p>
+              </Link>
+            </div>
+            <div className="links-sub-container">
+              <Link to="/popular" className="header-links">
+                <p className="link-text">Popular</p>
+              </Link>
+            </div>
+          </div>
         </div>
         <div className="header-search-profile-container">
           <Link to="/search">
