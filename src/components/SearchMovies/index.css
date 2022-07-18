@@ -24,3 +24,41 @@
   line-height: 31px;
   color: white;
 }
+
+.guid-container {
+}
+
+.guid-heading {
+  color: whitesmoke;
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.guid-para {
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: 300;
+
+  line-height: 40px;
+}
+
+.span-ele-guid {
+  color: #e50914;
+  font-size: 24px;
+  font-weight: 400;
+
+  line-height: 20px;
+  transition: all 500ms;
+}
+
+.guid-para:hover .span-ele-guid {
+  font-size: 25px;
+  font-weight: 450;
+}
+
+.loader-view {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

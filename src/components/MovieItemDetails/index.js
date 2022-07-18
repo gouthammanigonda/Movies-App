@@ -2,11 +2,20 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 
 import {Link, withRouter} from 'react-router-dom'
+import {AiOutlineWarning} from 'react-icons/ai'
 
 import Header from '../Header'
 import Footer from '../Footer'
 
 import './index.css'
+import LoaderSpinner from '../Loader'
+
+const apiConstant = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
 
 class MovieItemDetails extends Component {
   state = {
@@ -14,6 +23,7 @@ class MovieItemDetails extends Component {
     genre: [],
     language: [],
     similarMovies: [],
+    apiStatus: apiConstant.initial,
   }
 
   componentDidMount() {
@@ -21,6 +31,9 @@ class MovieItemDetails extends Component {
   }
 
   getMovieItemDetails = async () => {
+    this.setState({
+      apiStatus: apiConstant.inProgress,
+    })
     const token = Cookies.get('jwt_token')
     const {match} = this.props
     const {params} = match
@@ -74,23 +87,62 @@ class MovieItemDetails extends Component {
         language,
         genre,
         similarMovies,
+        apiStatus: apiConstant.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiConstant.failure,
       })
     }
   }
+
+  onClickTryAgain = () => {
+    this.getMovieItemDetails()
+  }
+
+  renderFailureView = () => (
+    <div className="view-container-main-container">
+      <Header />
+      <div className="view-container">
+        <div className="warning-content">
+          <AiOutlineWarning className="warning-icon each-icon" />
+          <p className="warning-msg each-para">
+            Something went wrong. Please try again
+          </p>
+          <button
+            type="button"
+            className="try-again each-btn"
+            onClick={this.onClickTryAgain}
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  )
+
+  renderLoaderView = () => (
+    <div className="view-container-main-container">
+      <Header />
+      <div className="view-container">
+        <div className="warning-content">
+          <LoaderSpinner />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  )
 
   renderEachMovieDetails = () => {
     const {movieDetails, language, similarMovies, genre} = this.state
     const {
       adult,
-      backdropPath,
       budget,
-
-      id,
       overview,
       posterPath,
       releaseData,
       runtime,
-
       title,
       voteAverage,
       voteCount,
@@ -208,8 +260,22 @@ class MovieItemDetails extends Component {
     )
   }
 
+  renderViews = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiConstant.failure:
+        return this.renderFailureView()
+      case apiConstant.success:
+        return this.renderEachMovieDetails()
+      case apiConstant.inProgress:
+        return this.renderLoaderView()
+      default:
+        return null
+    }
+  }
+
   render() {
-    return <div>{this.renderEachMovieDetails()}</div>
+    return <div>{this.renderViews()}</div>
   }
 }
 

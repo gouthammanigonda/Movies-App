@@ -26,7 +26,9 @@ class Home extends Component {
     topRatedList: [],
     originalList: [],
     randomItem: [],
-    apiStatus: apiConstant.initial,
+    apiStatusTrending: apiConstant.initial,
+    apiStatusTopRated: apiConstant.initial,
+    apiStatusOriginal: apiConstant.initial,
   }
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class Home extends Component {
   }
 
   getTrendingNowMovies = async () => {
-    this.setState({apiStatus: apiConstant.inProgress})
+    this.setState({apiStatusTrending: apiConstant.inProgress})
     const token = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/movies-app/trending-movies'
     const options = {
@@ -61,16 +63,19 @@ class Home extends Component {
       this.setState({
         trendingList: updatedList,
         randomItem,
-        apiStatus: apiConstant.success,
+        apiStatusTrending: apiConstant.success,
       })
     } else {
       this.setState({
-        apiStatus: apiConstant.failure,
+        apiStatusTrending: apiConstant.failure,
       })
     }
   }
 
   getTopRatedMovies = async () => {
+    this.setState({
+      apiStatusTopRated: apiConstant.inProgress,
+    })
     const token = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/movies-app/top-rated-movies'
     const options = {
@@ -92,11 +97,19 @@ class Home extends Component {
       }))
       this.setState({
         topRatedList: updatedData,
+        apiStatusTopRated: apiConstant.success,
+      })
+    } else {
+      this.setState({
+        apiStatusTopRated: apiConstant.failure,
       })
     }
   }
 
   getOriginals = async () => {
+    this.setState({
+      apiStatusOriginal: apiConstant.inProgress,
+    })
     const token = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/movies-app/originals'
     const options = {
@@ -119,6 +132,11 @@ class Home extends Component {
 
       this.setState({
         originalList: updatedList,
+        apiStatusOriginal: apiConstant.success,
+      })
+    } else {
+      this.setState({
+        apiStatusOriginal: apiConstant.failure,
       })
     }
   }
@@ -140,7 +158,7 @@ class Home extends Component {
   )
 
   renderPosterViewHome = () => {
-    const {randomItem, apiStatus} = this.state
+    const {randomItem, apiStatusTrending} = this.state
     const {overview, posterPath, title} = randomItem
 
     const style = {
@@ -156,7 +174,7 @@ class Home extends Component {
         <div className="linear-gradient">
           <div className="poster-container">
             {(() => {
-              switch (apiStatus) {
+              switch (apiStatusTrending) {
                 case apiConstant.failure:
                   return this.renderFailureViewTrending()
                 case apiConstant.success:
@@ -287,14 +305,21 @@ class Home extends Component {
   )
 
   renderSecondSection = () => {
-    const {trendingList, originalList, topRatedList, apiStatus} = this.state
+    const {
+      trendingList,
+      originalList,
+      topRatedList,
+      apiStatusTrending,
+      apiStatusTopRated,
+      apiStatusOriginal,
+    } = this.state
     return (
       <div className="second-session-home">
         <div className="trending-container">
           <h1 className="each-ul-heading">Trending Now</h1>
           <ul className="unordered-list">
             {(() => {
-              switch (apiStatus) {
+              switch (apiStatusTrending) {
                 case apiConstant.failure:
                   return this.renderFailureViewTrending()
                 case apiConstant.inProgress:
@@ -311,7 +336,7 @@ class Home extends Component {
           <h1 className="each-ul-heading">Top Rated</h1>
           <ul className="unordered-list">
             {(() => {
-              switch (apiStatus) {
+              switch (apiStatusTopRated) {
                 case apiConstant.failure:
                   return this.renderFailureViewTopRated()
                 case apiConstant.inProgress:
@@ -328,7 +353,7 @@ class Home extends Component {
           <h1 className="each-ul-heading">Originals</h1>
           <ul className="unordered-list">
             {(() => {
-              switch (apiStatus) {
+              switch (apiStatusOriginal) {
                 case apiConstant.failure:
                   return this.renderFailureViewOriginal()
                 case apiConstant.inProgress:

@@ -110,3 +110,32 @@
   width: 265px;
   height: 175px;
 }
+
+.view-container-main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #0c0b10;
+}
+
+.view-container {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.each-icon {
+  font-size: 35px;
+}
+
+.each-para {
+  font-size: 25px;
+}
+
+.each-btn {
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+}

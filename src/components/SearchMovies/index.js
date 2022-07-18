@@ -4,15 +4,23 @@ import {Link} from 'react-router-dom'
 
 import Header from '../Header'
 import Footer from '../Footer'
+import LoaderSlider from '../Loader'
 
 import './index.css'
+
+const apiConstant = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
 
 class SearchMovies extends Component {
   state = {
     searchList: [],
     searchBtnClicked: false,
     searchIp: '',
-    noResults: false,
+    apiStatusSearch: apiConstant.initial,
   }
 
   componentDidMount() {
@@ -20,7 +28,10 @@ class SearchMovies extends Component {
   }
 
   getSearchMovies = async searchIp => {
-    console.log(searchIp, 'search get')
+    this.setState({
+      apiStatusSearch: apiConstant.inProgress,
+    })
+
     const token = Cookies.get('jwt_token')
     const url = `https://apis.ccbp.in/movies-app/movies-search?search=${searchIp}`
     const options = {
@@ -33,13 +44,13 @@ class SearchMovies extends Component {
 
     if (response.ok) {
       const data = await response.json()
+
       if (data.results.length === 0) {
         this.setState({
           searchIp,
-          noResults: true,
+          apiStatusSearch: apiConstant.failure,
         })
       } else {
-        console.log(data)
         const updatedData = data.results.map(each => ({
           backdropPath: each.backdrop_path,
           id: each.id,
@@ -48,13 +59,9 @@ class SearchMovies extends Component {
         }))
         this.setState({
           searchList: updatedData,
-          noResults: false,
+          apiStatusSearch: apiConstant.success,
         })
       }
-    } else {
-      this.setState({
-        noResults: true,
-      })
     }
   }
 
@@ -77,8 +84,9 @@ class SearchMovies extends Component {
           alt="no movies"
           className="no-results"
         />
-        <p className="no-results-para">
-          Your search for {searchIp} did not find any matches.
+        <p className="guid-para">
+          Your search for <span className="span-ele-guid">{searchIp}</span> did
+          not find any matches.
         </p>
       </div>
     )
@@ -110,10 +118,36 @@ class SearchMovies extends Component {
     )
   }
 
+  renderLoaderView = () => (
+    <div className="loader-view ">
+      <LoaderSlider />
+    </div>
+  )
+
   renderSearchItems = () => {
-    const {noResults} = this.state
-    return noResults ? this.showNoResultsFound() : this.showResults()
+    const {apiStatusSearch} = this.state
+    switch (apiStatusSearch) {
+      case apiConstant.failure:
+        return this.showNoResultsFound()
+      case apiConstant.inProgress:
+        return this.renderLoaderView()
+      case apiConstant.success:
+        return this.showResults()
+      default:
+        return null
+    }
   }
+
+  renderSearchGuid = () => (
+    <div className="guid-container">
+      <h1 className="guid-heading">Search Guid :</h1>
+      <p className="guid-para">
+        Enter the movie name you want to get in,{' '}
+        <span className="span-ele-guid"> Header search </span>
+        section.
+      </p>
+    </div>
+  )
 
   renderSearchMoviesView = () => {
     const {searchBtnClicked} = this.state
@@ -126,7 +160,9 @@ class SearchMovies extends Component {
           setButtonDisable={this.setButtonDisable}
         />
         <div className="search-items">
-          {!searchBtnClicked ? '' : this.renderSearchItems()}
+          {!searchBtnClicked
+            ? this.renderSearchGuid()
+            : this.renderSearchItems()}
         </div>
         <Footer />
       </div>

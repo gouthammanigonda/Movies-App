@@ -16,8 +16,6 @@ class Header extends Component {
     })
   }
 
-  onClickSearchContainer = () => {}
-
   onClickSearchBtn = () => {
     const {searchIp} = this.state
     const {triggerSearchBtn} = this.props
